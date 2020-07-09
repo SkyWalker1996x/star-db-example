@@ -2,12 +2,14 @@ import React, { Component } from "react";
 
 import SwapiService from "../../services/swapi-service";
 import "./random-planet.css";
+import Loader from "../loader";
 
 export default class RandomPlanet extends Component {
   swapiService = new SwapiService();
 
   state = {
-    planet: {}
+    planet: {},
+    loading: true,
   };
 
   constructor() {
@@ -27,7 +29,18 @@ export default class RandomPlanet extends Component {
   };
 
   render() {
-    const { id, name, population, rotationPeriod, diameter } = this.state.planet;
+    const {
+      planet: { id, name, population, rotationPeriod, diameter },
+      loading,
+    } = this.state;
+
+    if (loading) {
+      return (
+        <div className="random-planet jumbotron rounded">
+          <Loader />
+        </div>
+      );
+    }
 
     return (
       <div className="random-planet jumbotron rounded">
