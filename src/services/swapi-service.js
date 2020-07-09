@@ -1,41 +1,86 @@
 export default class SwapiService {
+  _apiBase = "https://swapi.dev/api/";
 
-    _apiBase = 'https://swapi.co/api';
-
-    async getResource(url) {
-        const res = await fetch(`${this._apiBase}${url}`);
-
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}` +
-                `, received ${res.status}`)
-        }
-        return await res.json();
+  getRecource = async (url) => {
+    const res = await fetch(`${this._apiBase}${url}`);
+    if (!res.ok) {
+      throw new Error(`Could not fetch ${url}` + `, received ${res.status}`);
     }
+    return await res.json();
+  };
 
-    async getAllPeople() {
-        const res = await this.getResource(`/people/`);
-        return res.results;
-    }
+  getAllPeople = async () => {
+    const res = await this.getRecource("people");
 
-    getPerson(id) {
-        return this.getResource(`/people/${id}/`);
-    }
+    return res.results.map((item) => this._transformPerson(item));
+  };
 
-    async getAllPlanets() {
-        const res = await this.getResource(`/planets/`);
-        return res.results;
-    }
+  getAllPlanet = async () => {
+    const res = await this.getRecource("planets");
 
-    getPlanet(id) {
-        return this.getResource(`/planets/${id}/`);
-    }
+    return res.results.map((item) => this._transformPlanet(item));
+  };
 
-    async getAllStarships() {
-        const res = await this.getResource(`/starships/`);
-        return res.results;
-    }
+  getAllStarships = async () => {
+    const res = await this.getRecource("starships");
 
-    getStarship(id) {
-        return this.getResource(`/starships/${id}/`);
-    }
+    return res.results.map((item) => this._transformStarship(item));
+  };
+
+  getPerson = async (id) => {
+    const res = await this.getRecource(`people/${id}`);
+
+    return this._transformPerson(res);
+  };
+
+  getPlanet = async (id) => {
+    const res = await this.getRecource(`planets/${id}`);
+
+    return this._transformPlanet(res);
+  };
+
+  getStarship = async (id) => {
+    const res = await this.getRecource(`starships/${id}`);
+
+    return this._transformStarship(res);
+  };
+
+  _extractId(item) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+  }
+
+  _transformPerson = (person) => {
+    return {
+      id: this._extractId(person),
+      name: person.name,
+      gender: person.gender,
+      birthYear: person.birth_year,
+      eyeColor: person.eye_color,
+    };
+  };
+
+  _transformPlanet = (planet) => {
+    return {
+      id: this._extractId(planet),
+      name: planet.name,
+      population: planet.population,
+      rotationPeriod: planet.rotation_period,
+      diameter: planet.diameter,
+    };
+  };
+
+  _transformStarship = (starship) => {
+    return {
+      id: this._extractId(starship),
+      name: starship.name,
+      model: starship.model,
+      manufacturer: starship.manufacturer,
+      costInCredits: starship.cost_in_credits,
+      length: starship.length,
+      crew: starship.crew,
+      passengers: starship.passengers,
+      cargoCapacity: starship.cargo_capacity,
+    };
+  };
 }
