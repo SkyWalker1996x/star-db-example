@@ -9,7 +9,7 @@ import "./app.css";
 
 class App extends Component {
   state = {
-    selectedItem: null,
+    selectedItem: 7,
   };
 
   onItemSelected = (id) => {
@@ -29,7 +29,7 @@ class App extends Component {
             <ItemList onItemSelected={this.onItemSelected} />
           </div>
           <div className="col-md-6">
-            <PersonDetails />
+            <PersonDetails personId={this.state.selectedItem}/>
           </div>
         </div>
       </div>
