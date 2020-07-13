@@ -11,6 +11,7 @@ import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page";
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
+import ErrorBoundary from "../error-boundary";
 
 class App extends Component {
   swapiService = new SwapiService();
@@ -45,18 +46,20 @@ class App extends Component {
         <ErrorButton />
         <PeoplePage />
 
-        <Row
-          left={
-            <ItemList
-              onItemSelected={this.onItemSelected}
-              getData={this.swapiService.getAllPlanet}
-              renderItem={({ name, population }) =>
-                `${name} (population: ${population})`
-              }
+        <ErrorBoundary>
+            <Row
+                left={
+                    <ItemList
+                        onItemSelected={this.onItemSelected}
+                        getData={this.swapiService.getAllPlanet}
+                        renderItem={({ name, population }) =>
+                            `${name} (population: ${population})`
+                        }
+                    />
+                }
+                right={<PersonDetails personId={this.state.selectedItem} />}
             />
-          }
-          right={<PersonDetails personId={this.state.selectedItem} />}
-        />
+        </ErrorBoundary>
       </div>
     );
   }
