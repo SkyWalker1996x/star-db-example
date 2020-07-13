@@ -49,6 +49,7 @@ class App extends Component {
             <ItemList
               onItemSelected={this.onItemSelected}
               getData={this.swapiService.getAllPlanet}
+              renderItem={({ name, population }) => `${name} (population: ${population})`}
             />
           </div>
           <div className="col-md-6">
