@@ -10,6 +10,7 @@ import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page";
 import SwapiService from "../../services/swapi-service";
+import Row from "../row";
 
 class App extends Component {
   swapiService = new SwapiService();
@@ -44,18 +45,18 @@ class App extends Component {
         <ErrorButton />
         <PeoplePage />
 
-        <div className="row mb2">
-          <div className="col-md-6">
+        <Row
+          left={
             <ItemList
               onItemSelected={this.onItemSelected}
               getData={this.swapiService.getAllPlanet}
-              renderItem={({ name, population }) => `${name} (population: ${population})`}
+              renderItem={({ name, population }) =>
+                `${name} (population: ${population})`
+              }
             />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedItem} />
-          </div>
-        </div>
+          }
+          right={<PersonDetails personId={this.state.selectedItem} />}
+        />
       </div>
     );
   }
