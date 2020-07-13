@@ -9,8 +9,11 @@ import "./app.css";
 import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page";
+import SwapiService from "../../services/swapi-service";
 
 class App extends Component {
+  swapiService = new SwapiService();
+
   state = {
     selectedItem: 7,
     hasError: false,
@@ -39,19 +42,19 @@ class App extends Component {
         <Header />
         <RandomPlanet />
         <ErrorButton />
+        <PeoplePage />
 
-        {/*<div className="row mb2">
+        <div className="row mb2">
           <div className="col-md-6">
-            <ItemList onItemSelected={this.onItemSelected} />
+            <ItemList
+              onItemSelected={this.onItemSelected}
+              getData={this.swapiService.getAllPlanet}
+            />
           </div>
           <div className="col-md-6">
             <PersonDetails personId={this.state.selectedItem} />
           </div>
-        </div>*/}
-
-        <PeoplePage/>
-        <PeoplePage/>
-        <PeoplePage/>
+        </div>
       </div>
     );
   }
