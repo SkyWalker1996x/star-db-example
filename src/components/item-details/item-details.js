@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-import "./person-details.css";
+import "./item-details.css";
 import SwapiService from "../../services/swapi-service";
 import ErrorButton from "../error-button";
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
   };
 
   componentDidMount() {
@@ -16,31 +16,31 @@ export default class PersonDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId) {
+    if (this.props.itemId !== prevProps.itemId) {
       this.updatePerson()
     }
   }
 
   updatePerson = () => {
-    const { personId } = this.props;
-    if (!personId) {
+    const { itemId,getData } = this.props;
+    if (!itemId) {
       return;
     }
 
-    this.swapiService.getPerson(personId).then((person) => {
+    getData(itemId).then((item) => {
       this.setState({
-        person,
+        item,
       });
     });
   };
 
   render() {
-    if (!this.state.person) {
+    if (!this.state.item) {
       return <span>Select person from a list</span>;
     }
 
     const {
-      person: { id, name, gender, birthYear, eyeColor },
+      item: { id, name, gender, birthYear, eyeColor },
     } = this.state;
 
     return (
