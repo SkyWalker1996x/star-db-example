@@ -61,6 +61,7 @@ class App extends Component {
               <ItemDetails
                 itemId={this.state.selectedItem}
                 getData={this.swapiService.getPlanet}
+                getImageUrl={this.swapiService.getPlanetImage}
               />
             }
           />

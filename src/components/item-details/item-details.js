@@ -9,6 +9,7 @@ export default class ItemDetails extends Component {
 
   state = {
     item: null,
+    image: null,
   };
 
   componentDidMount() {
@@ -17,12 +18,12 @@ export default class ItemDetails extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.itemId !== prevProps.itemId) {
-      this.updatePerson()
+      this.updatePerson();
     }
   }
 
   updatePerson = () => {
-    const { itemId,getData } = this.props;
+    const { itemId, getData, getImageUrl } = this.props;
     if (!itemId) {
       return;
     }
@@ -30,6 +31,7 @@ export default class ItemDetails extends Component {
     getData(itemId).then((item) => {
       this.setState({
         item,
+        image: getImageUrl(item),
       });
     });
   };
@@ -41,13 +43,14 @@ export default class ItemDetails extends Component {
 
     const {
       item: { id, name, gender, birthYear, eyeColor },
+      image,
     } = this.state;
 
     return (
       <div className="person-details card">
         <img
           className="person-image"
-          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+          src={image}
         />
 
         <div className="card-body">
@@ -66,7 +69,7 @@ export default class ItemDetails extends Component {
               <span>{eyeColor}</span>
             </li>
           </ul>
-          <ErrorButton/>
+          <ErrorButton />
         </div>
       </div>
     );
