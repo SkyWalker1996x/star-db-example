@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import ItemList from "../item-list/item-list";
-import ItemDetails from "../item-details/item-details";
+import ItemDetails, {Record} from "../item-details/item-details";
 import ErrorIndicator from "../error-indicator/error-indicator";
 import Row from "../row";
 import SwapiService from "../../services/swapi-service";
@@ -43,7 +43,10 @@ export default class PeoplePage extends Component {
         itemId={this.state.selectedPerson}
         getData={this.swapiService.getPerson}
         getImageUrl={this.swapiService.getPersonImage}
-      />
+      >
+        <Record field='name' label='Name'/>
+        <Record field='birthYear' label='Birth Year'/>
+      </ItemDetails>
     );
 
     return <Row left={itemList} right={personDetails} />;
