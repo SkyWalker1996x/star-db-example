@@ -11,7 +11,7 @@ import PeoplePage from "../people-page";
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
 import ErrorBoundary from "../error-boundary";
-import ItemDetails from "../item-details";
+import ItemDetails, { Record } from "../item-details";
 
 class App extends Component {
   swapiService = new SwapiService();
@@ -62,7 +62,10 @@ class App extends Component {
                 itemId={this.state.selectedItem}
                 getData={this.swapiService.getPlanet}
                 getImageUrl={this.swapiService.getPlanetImage}
-              />
+              >
+                <Record field={'name'} label={'Name'}/>
+                <Record field={'population'} label={'Population'}/>
+              </ItemDetails>
             }
           />
         </ErrorBoundary>
