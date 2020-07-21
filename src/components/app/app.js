@@ -45,37 +45,14 @@ class App extends Component {
         <Header />
         {/*<RandomPlanet />
         <ErrorButton />*/}
-        <Row
-          left={
-            <PersonList onItemSelected={this.onItemSelected}>
-              {({ name, gender }) => `${name} (${gender})`}
-            </PersonList>
-          }
-          right={<PersonDetails id={this.state.selectedItem} />}
-        />
-        {/*<ErrorBoundary>
+        <ErrorBoundary>
           <Row
-            left={
-              <ItemList
-                onItemSelected={this.onItemSelected}
-                getData={this.swapiService.getAllPlanet}
-                renderItem={({ name, population }) =>
-                  `${name} (population: ${population})`
-                }
-              />
-            }
-            right={
-              <ItemDetails
-                itemId={this.state.selectedItem}
-                getData={this.swapiService.getPlanet}
-                getImageUrl={this.swapiService.getPlanetImage}
-              >
-                <Record field={'name'} label={'Name'}/>
-                <Record field={'population'} label={'Population'}/>
-              </ItemDetails>
-            }
+              left={<PersonList onItemSelected={this.onItemSelected} />}
+              right={<PersonDetails id={this.state.selectedItem} />}
           />
-        </ErrorBoundary>*/}
+        </ErrorBoundary>
+
+
       </div>
     );
   }
