@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+
 import Header from "../header";
 import RandomPlanet from "../random-planet";
+import ItemList from "../item-list";
+
 import "./app.css";
+
 import ErrorIndicator from "../error-indicator";
+
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
 import ErrorBoundary from "../error-boundary";
-import {
-  PersonDetails,
-  PersonList,
-  PlanetList,
-  StarshipList,
-} from "../sw-components";
+
+import {PersonDetails, PersonList, PlanetList, StarshipList} from "../sw-components";
 import { SwapiServiceProvider } from "../swapi-sevice-context";
 import PlanetDetails from "../sw-components/planet-details";
 import StarshipDetails from "../sw-components/starship-details";
@@ -45,8 +46,8 @@ class App extends Component {
     return (
       <div className="container">
         <Header />
-        <RandomPlanet />
-
+        {/*<RandomPlanet />
+        <ErrorButton />*/}
         <ErrorBoundary>
           <SwapiServiceProvider value={this.swapiService}>
             <Row
@@ -55,13 +56,13 @@ class App extends Component {
             />
 
             <Row
-              left={<PlanetList onItemSelected={this.onItemSelected} />}
-              right={<PlanetDetails id={this.state.selectedItem} />}
+                left={<PlanetList onItemSelected={this.onItemSelected} />}
+                right={<PlanetDetails id={this.state.selectedItem} />}
             />
 
             <Row
-              left={<StarshipList onItemSelected={this.onItemSelected} />}
-              right={<StarshipDetails id={this.state.selectedItem} />}
+                left={<StarshipList onItemSelected={this.onItemSelected} />}
+                right={<StarshipDetails id={this.state.selectedItem} />}
             />
           </SwapiServiceProvider>
         </ErrorBoundary>
