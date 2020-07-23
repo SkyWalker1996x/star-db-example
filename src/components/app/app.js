@@ -12,14 +12,16 @@ import SwapiService from "../../services/swapi-service";
 import Row from "../row";
 import ErrorBoundary from "../error-boundary";
 import ItemDetails, { Record } from "../item-details";
-import { PersonDetails, PersonList } from "../sw-components";
+import {PersonDetails, PersonList, PlanetList, StarshipList} from "../sw-components";
 import { SwapiServiceProvider } from "../swapi-sevice-context";
+import PlanetDetails from "../sw-components/planet-details";
+import StarshipDetails from "../sw-components/starship-details";
 
 class App extends Component {
   swapiService = new SwapiService();
 
   state = {
-    selectedItem: 7,
+    selectedItem: 9,
     hasError: false,
   };
 
@@ -51,6 +53,16 @@ class App extends Component {
             <Row
               left={<PersonList onItemSelected={this.onItemSelected} />}
               right={<PersonDetails id={this.state.selectedItem} />}
+            />
+
+            <Row
+                left={<PlanetList onItemSelected={this.onItemSelected} />}
+                right={<PlanetDetails id={this.state.selectedItem} />}
+            />
+
+            <Row
+                left={<StarshipList onItemSelected={this.onItemSelected} />}
+                right={<StarshipDetails id={this.state.selectedItem} />}
             />
           </SwapiServiceProvider>
         </ErrorBoundary>

@@ -2,9 +2,9 @@ import React from "react";
 import ItemDetails, { Record } from "../item-details";
 import { withSwapiService } from "../hoc";
 
-const PlanetDetails = ({ id, getPlanet, getPlanetImage }) => {
+const PlanetDetails = ({ id, getData, getImageUrl }) => {
   return (
-    <ItemDetails itemId={id} getData={getPlanet} getImageUrl={getPlanetImage}>
+    <ItemDetails itemId={id} getData={getData} getImageUrl={getImageUrl}>
       <Record field={"name"} label={"Name"} />
       <Record field={"population"} label={"Population"} />
     </ItemDetails>
