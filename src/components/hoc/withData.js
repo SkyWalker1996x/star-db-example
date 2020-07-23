@@ -20,7 +20,7 @@ const withData = (View, getData) => {
     };
 
     render() {
-      const { data, loading, error } = this.state;
+      const { data } = this.state;
 
       if (!data) {
         return <Loader />;

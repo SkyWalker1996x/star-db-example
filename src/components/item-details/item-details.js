@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import "./item-details.css";
-import SwapiService from "../../services/swapi-service";
 import ErrorButton from "../error-button";
 
 const Record = ({ item, field, label }) => {
@@ -16,7 +14,7 @@ const Record = ({ item, field, label }) => {
 export { Record };
 
 export default class ItemDetails extends Component {
-  swapiService = new SwapiService();
+
 
   state = {
     item: null,
@@ -59,7 +57,7 @@ export default class ItemDetails extends Component {
 
     return (
       <div className="person-details card">
-        <img className="person-image" src={image} />
+        <img className="person-image" src={image} alt="details" />
 
         <div className="card-body">
           <h4>{item.name}</h4>

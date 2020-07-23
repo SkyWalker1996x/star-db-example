@@ -65,6 +65,7 @@ const PlanetLoaded = ({ id, name, population, rotationPeriod, diameter }) => {
       <img
         className="planet-image"
         src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+        alt="img-random-planet"
       />
       <div>
         <h4>{name}</h4>
