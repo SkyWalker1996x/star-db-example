@@ -13,6 +13,7 @@ import Row from "../row";
 import ErrorBoundary from "../error-boundary";
 import ItemDetails, { Record } from "../item-details";
 import { PersonDetails, PersonList } from "../sw-components";
+import { SwapiServiceProvider } from "../swapi-sevice-context";
 
 class App extends Component {
   swapiService = new SwapiService();
@@ -46,13 +47,13 @@ class App extends Component {
         {/*<RandomPlanet />
         <ErrorButton />*/}
         <ErrorBoundary>
-          <Row
+          <SwapiServiceProvider value={this.swapiService}>
+            <Row
               left={<PersonList onItemSelected={this.onItemSelected} />}
               right={<PersonDetails id={this.state.selectedItem} />}
-          />
+            />
+          </SwapiServiceProvider>
         </ErrorBoundary>
-
-
       </div>
     );
   }
